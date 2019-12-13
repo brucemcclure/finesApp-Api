@@ -1,0 +1,20 @@
+<h1>All of the users</h1>
+
+<a href="/users/new">Create New Fine</a>
+
+
+
+{{#each users}}
+<div>
+    <p>Name: {{ this.firstName }} - {{ this.surName }}</p>
+    <p>email: {{ this.email }}</p>
+</div>
+
+<a href="/users/{{this._id}}">View User</a>
+{{!-- notice the "?_method=DELETE" this must be added to use a delete verb --}}
+{{!-- Its a query param which is given 'method=DELETE' --}}
+<a href="/users/{{this._id}}?_method=DELETE">Delete User</a>
+<a href="/users/{{this._id}}/edit">Edit User</a>
+{{!-- This horizontal line is frowned upon --}}
+<hr />
+{{/each}}

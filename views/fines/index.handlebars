@@ -1,0 +1,22 @@
+<h1>All of the fines</h1>
+
+<a href="/fines/new">Create New Fine</a>
+
+
+
+{{#each fines}}
+<div>
+    <p>Title: {{ this.title }}</p>
+    <p>Body: {{ this.body }}</p>
+    <p>Amount: {{ this.amount }}</p>
+    <p>Person: {{ this.person }}</p>
+</div>
+
+<a href="/fines/{{this._id}}">View Fine</a>
+{{!-- notice the "?_method=DELETE" this must be added to use a delete verb --}}
+{{!-- Its a query param which is given 'method=DELETE' --}}
+<a href="/fines/{{this._id}}?_method=DELETE">Delete Fine</a>
+<a href="/fines/{{this._id}}/edit">Edit Fine</a>
+{{!-- This horizontal line is frowned upon --}}
+<hr />
+{{/each}}
