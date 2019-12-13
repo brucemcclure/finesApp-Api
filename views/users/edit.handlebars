@@ -1,0 +1,26 @@
+<h1>Edit User</h1>
+{{user.id}}
+
+<form method="post" action="/users/{{user.id}}?_method=PUT">
+    <div>
+        <label>First Name</label>
+    </div>
+    <div>
+        <input type="text" name="firstName" value="{{user.firstName}}" />
+    </div>
+    <div>
+        <label>Surname</label>
+    </div>
+    <div>
+        <input type="text" name="surname" value="{{user.surname}}" />
+    </div>
+    <div>
+        <label>Email</label>
+    </div>
+    <div>
+        <input type="text" name="email" value="{{user.email}}" />
+    </div>
+    <div>
+        <input type="submit" value="Submit Form" />
+    </div>
+</form>

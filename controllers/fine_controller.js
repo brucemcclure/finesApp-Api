@@ -1,30 +1,65 @@
 const FineModel = require('../database/model/fine_model')
 
+const create = async (req, res) => {
+  let { title, body, amount, person } = req.body
+  await FineModel.create({
+    title,
+    body,
+    amount,
+    person
+  }).catch(err => res.status(500).send(err))
+  res.redirect('/fines')
+}
+
+const destroy = async (req, res) => {
+  let { id } = req.params
+  await FineModel.findByIdAndRemove(id)
+  res.redirect('/fines')
+}
+
+const edit = async (req, res) => {
+  let { id } = req.params
+  let fine = await FineModel.findById(id).catch(err =>
+    res.status(500).send(err)
+  )
+  res.render('fines/edit', { fine })
+}
+
 const index = async (req, res) => {
-  let fines = await FineModel.find() // Extracting all the fines from the DB
-  res.render('fines/index', { fines }) // Render the 'author/index view' pass it the fines
+  let fines = await FineModel.find().catch(err => res.status(500).send(err))
+  res.render('fines/index', { fines })
 }
 
 const make = (req, res) => {
   res.render('fines/new')
 }
 
-const create = async (req, res) => {
-  let { title, body, amount, person } = req.body // Destructuring off the body, amount and person from the req.body
-  let fine = await FineModel.create({ title, body, amount, person }) // Creating the fine
-    .catch(err => res.status(500).send(err))
-  res.redirect('/fines') // Redirect to /fines
+const show = async (req, res) => {
+  let { id } = req.params
+  let fine = await FineModel.findById(id).catch(err =>
+    res.status(500).send(err)
+  )
+  res.render('fines/show', { fine })
 }
 
-const destroy = async (req, res) => {
-  let { id } = req.params // Destructure off the id off req.params
-  await FineModel.findByIdAndRemove(id) // Delete the book by finding them by the id
-  res.redirect('/fines') // Redirect the user to the index page of all the books
+const update = async (req, res) => {
+  let { title, body, amount, person } = req.body
+  let { id } = req.params
+  await FineModel.findByIdAndUpdate(id, {
+    title,
+    body,
+    amount,
+    person
+  }).catch(err => res.status(500).send(err))
+  res.redirect(`/fines/${id}`)
 }
 
 module.exports = {
+  create,
+  destroy,
+  edit,
   index,
   make,
-  create,
-  destroy
+  show,
+  update
 }

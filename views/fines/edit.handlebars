@@ -1,0 +1,36 @@
+<h1>Edit Fine</h1>
+
+<form method="post" action="/fines/{{fine.id}}?_method=PUT">
+    <div>
+        <label>Title</label>
+    </div>
+    <div>
+        <input type="text" name="title" value="{{fine.title}}" />
+    </div>
+    <div>
+        <label>Fine</label>
+    </div>
+    <div>
+        <input type="text" name="body" value="{{fine.body}}" />
+    </div>
+    <div>
+        <label>Amount</label>
+    </div>
+    <div>
+        <input type="text" name="amount" value="{{fine.amount}}" />
+    </div>
+    <div>
+        <label>Person</label>
+    </div>
+    <div>
+        <select name="person" value="{{fine.person}}">
+            <option value="matt">Matt</option>
+            <option value="mark">Mark</option>
+            <option value="luke">Luke</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="submit" value="Submit Form" />
+    </div>
+</form>

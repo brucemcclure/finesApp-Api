@@ -1,6 +1,7 @@
 const express = require('express') // This is the framework we are using to build the server
 const exphbs = require('express-handlebars') // This is the templating engine we will use for the views
 const routes = require('./routes') // Importing the routes from routes.js
+const methodOverride = require('method-override')
 const mongoose = require('mongoose') // This is the ODM (Object data modelling) package
 const app = express() // This creates the express app. Notice that it is a function. Dont pass this around the app!
 const port = 4343 // A variable to hold our port number. This will be used to start the server
@@ -28,6 +29,8 @@ app.set('view engine', 'handlebars') // Setting the view engine to be handlebars
 // Essentially a funnel to make sure the correct data comes into our app
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }))
 
 app.use(routes)
 
